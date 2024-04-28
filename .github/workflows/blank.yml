@@ -12,6 +12,16 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      clusterName:
+        description: 'Name of the EKS cluster'
+        required: true
+      awsRegion:
+        description: 'AWS Region for the cluster'
+        required: true
+      action:
+        description: 'Action to perform (apply/destroy)'
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,7 +37,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo ${{ github.event.inputs.clusterName }}
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
